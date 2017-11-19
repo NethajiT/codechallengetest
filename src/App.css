@@ -1,0 +1,48 @@
+#Description{
+  height:30px;
+  position:relative;
+  top:8px
+}
+
+#Radio{
+  border:solid;
+  border-width: 1px;
+  padding:3px 3px 3px 3px;
+  position:relative;
+}
+
+#View{
+  height: 400px;
+  padding-top:0
+}
+
+#button{
+  position:relative;
+  bottom:-40px;
+  float:right;
+}
+
+button{
+  border-radius: 6px;
+}
+
+#Head{
+border:solid;
+border-width: 1px;
+background:#f2f2f2;
+padding:3px 0px 3px 0px;
+
+}
+
+#Data{
+  border: solid;
+  padding:3px 3px 3px 3px;
+  height:230px;
+  border:1px;
+}
+
+#Create{
+  position:relative; 
+  border-radius: 6px;
+
+}

@@ -5,15 +5,14 @@
 }
 
 #Radio{
-  border:solid;
-  border-width: 1px;
+  border: 1px solid gray;
   padding:3px 3px 3px 3px;
   position:relative;
 }
 
 #View{
-  height: 400px;
-  padding-top:0
+  height: 600px;
+  border-color: #32a8d3;
 }
 
 #button{
@@ -27,22 +26,30 @@ button{
 }
 
 #Head{
-border:solid;
+border: 1px solid gray;
+font-weight: bold;
 border-width: 1px;
 background:#f2f2f2;
 padding:3px 0px 3px 0px;
 
 }
-
+body {margin:0;}
 #Data{
-  border: solid;
+ border: 1px solid gray;
   padding:3px 3px 3px 3px;
-  height:230px;
-  border:1px;
+  height:450px;
+ 
 }
 
 #Create{
   position:relative; 
   border-radius: 6px;
+  height: 40px;
+  width:130px;
 
+}
+
+#Datas{
+   border: 1px solid gray;
+   padding:3px 3px 3px 3px;
 }

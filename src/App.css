@@ -1,3 +1,12 @@
+.material-icons{
+  background:gray
+  
+} 
+#Tag,#Key,#Edit{
+  font-size:20px;
+  position:relative;
+  top:6px;
+}
 #Description{
   height:30px;
   position:relative;
@@ -25,7 +34,8 @@ button{
   border-radius: 6px;
 }
 
-#Head{
+#Heads{
+
 border: 1px solid gray;
 font-weight: bold;
 border-width: 1px;

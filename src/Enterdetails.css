@@ -77,3 +77,10 @@ button{
 .Numberdefault{
     color:gray;
 }
+.Page{
+    background:gray;
+    border:1px solid;
+    padding-left:5px;
+    position:relative;
+    left:850px;
+}

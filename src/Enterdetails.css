@@ -1,3 +1,4 @@
+ 
 #EDcontent{
     border:1px solid gray;
     height:500px;
@@ -20,7 +21,7 @@
   text-align: center;
   color:#616466;
   font-weight:bold;
-  font-size: 10px;
+  font-size: 12px;
   padding: 10px 14px 10px;
   text-decoration: none;  
 }
@@ -29,6 +30,9 @@
     border-bottom:3px dotted gray;
     background: white;
     font-size:12px;    
+    padding:3px 0px 3px 0px;
+    font-weight:bold;
+    
 }
 
 #Output{
@@ -58,4 +62,25 @@ button{
 #View{
     border-color:#32a8d3;
     height:620px;
+}
+
+.topnav a.active {
+ color:#0480d3;
+ 
+}
+
+.Number{
+    border-radius:6px;
+    background:#0480d3;
+    color:white;
+}
+.Numberdefault{
+    color:gray;
+}
+.Page{
+    background:gray;
+    border:1px solid;
+    padding-left:5px;
+    position:relative;
+    left:850px;
 }

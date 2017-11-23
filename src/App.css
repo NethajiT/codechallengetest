@@ -1,55 +1,18 @@
-#Description{
-  height:30px;
-  position:relative;
-  top:8px
+.md-selection-control-group{
+  border:1px solid gray;
+  width:25px;
+  padding:10px;
 }
 
-#Radio{
+#Titles{
   border: 1px solid gray;
-  padding:3px 3px 3px 3px;
-  position:relative;
-}
-
-#View{
-  height: 600px;
-  border-color: #32a8d3;
-}
-
-#button{
-  position:relative;
-  bottom:-40px;
-  float:right;
-}
-
-button{
-  border-radius: 6px;
-}
-
-#Head{
-border: 1px solid gray;
 font-weight: bold;
 border-width: 1px;
 background:#f2f2f2;
 padding:3px 0px 3px 0px;
-
-}
-body {margin:0;}
-#Data{
- border: 1px solid gray;
-  padding:3px 3px 3px 3px;
-  height:450px;
- 
 }
 
-#Create{
-  position:relative; 
-  border-radius: 6px;
-  height: 40px;
-  width:130px;
-
-}
-
-#Datas{
-   border: 1px solid gray;
-   padding:3px 3px 3px 3px;
+#New{
+  font-weight: bold;
+  font-size: 20px;
 }

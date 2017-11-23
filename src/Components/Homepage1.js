@@ -1,17 +1,32 @@
-import React,{component} from 'react'
-import {connect} from 'react-redux'
-import { addTodo } from '../Actions'
+import React, { Component } from 'react';
 import { NavigationDrawer, Paper, Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
 import '../App.css';
 
-let AddTodo=({dispatch})=>{
 
-    let input;
+class App extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ''  
+    };
+  }
+  handleChange(fieldType, value) {
+     
+    this.setState({ email: value });
+   console.log(this.state.email)
+  }
 
-    
-return(
-    <div>
-       <fieldset id="Main">
+  create=()=> { 
+     alert(this.state.email)
+    window.location = "/Enterdetails";
+  }
+  
+  render() {
+    return (
+
+      <div>
+        <fieldset id="Main">
           <span id="New">Create New Measure </span>
           <fieldset>
             <div id="Titles"> &#10112; Measure Details</div>
@@ -61,11 +76,7 @@ return(
 
               </div>
               <br /> <br /><br /><br />
-              <Button raised onClick={e=>{
-              e.preventDefault()
-              dispatch(addTodo("ss"))
-             // window.location="/Enterdetails"
-            }} >Create Measure</Button>
+              <Button raised onClick={this.create}>Create Measure</Button>
               <br /><br /><br />
             </fieldset>
           </fieldset>
@@ -74,11 +85,11 @@ return(
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <Button raised>Save</Button>
           <br /><br /><br />
-        </fieldset> 
-    </div>
-)
+        </fieldset>
+
+      </div>
+    );
+  }
 }
 
-
-AddTodo = connect()(AddTodo)
-export default AddTodo
+export default App;

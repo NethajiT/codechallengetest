@@ -5,7 +5,7 @@ import App from './App';
 import Routing from './Routing'
 import registerServiceWorker from './registerServiceWorker';
 import WebFontLoader from 'webfontloader';
-
+  
 WebFontLoader.load({
   google: {
     families: ['Roboto:300,400,500,700', 'Material Icons'],

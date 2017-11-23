@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import '../Enterdetails.css'
 import { FontIcon } from 'react-md';
+import {renderTodos,renderPageNumbers} from './Pagination';
 
 class App extends React.Component {
     constructor() {
@@ -80,12 +81,12 @@ class App extends React.Component {
                 <fieldset id="View">
                     <p id="Title">Enter details for</p>
                     <div id="EDcontent">
-                        <div class="topnav">
-                            <a class="active" href="/Select Dataset">&#10112; &nbsp;Select Dataset</a>
-                            <a href="/RefineDataset"><span class="Numberdefault">&#10113;</span>&nbsp;Refine Dataset</a>
-                            <a href="/AddComputation"><span class="Numberdefault">&#10114;</span>&nbsp;Add Computation</a>
-                            <a href="/OutputAttributes"><span class="Numberdefault">&#10115;</span>&nbsp;Output Attributes</a>
-                            <a href="/Summary"><span class="Numberdefault">&#10116;</span>&nbsp;Summary</a>
+                        <div className="topnav">
+                            <a className="active" href="/Select Dataset">&#10112; &nbsp;Select Dataset</a>
+                            <a href="/RefineDataset"><span className="Numberdefault">&#10113;</span>&nbsp;Refine Dataset</a>
+                            <a href="/AddComputation"><span className="Numberdefault">&#10114;</span>&nbsp;Add Computation</a>
+                            <a href="/OutputAttributes"><span className="Numberdefault">&#10115;</span>&nbsp;Output Attributes</a>
+                            <a href="/Summary"><span className="Numberdefault">&#10116;</span>&nbsp;Summary</a>
                         </div>
                         <p id="Head">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Existing Datasets
@@ -102,6 +103,7 @@ class App extends React.Component {
 
             </div>
         )
+        
     }
 }
 

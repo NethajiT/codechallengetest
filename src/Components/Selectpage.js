@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom'
 import '../Enterdetails.css'
 import { FontIcon } from 'react-md';
 import {renderTodos,renderPageNumbers} from './Pagination';
+import { connect } from 'react-redux'
+
+//import Visible from '../Components/Visible'
+import List from '../Components/List'
 
 class App extends React.Component {
     constructor() {
@@ -42,6 +46,8 @@ class App extends React.Component {
         });
     }
     render() {
+        const x=this.props.todos;
+        console.log(x);
         const { data, currentPage, todosPerPage } = this.state;
 
         const indexOfLastTodo = currentPage * todosPerPage;
@@ -79,6 +85,7 @@ class App extends React.Component {
         return (
             <div>
                 <fieldset id="View">
+                     <List/>  ??
                     <p id="Title">Enter details for</p>
                     <div id="EDcontent">
                         <div className="topnav">
@@ -99,6 +106,7 @@ class App extends React.Component {
                         </fieldset>
                     </div>
                     <button>Cancel</button>
+                   
                 </fieldset>
 
             </div>
@@ -107,5 +115,11 @@ class App extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => ({ 
+  todos: state.todos
+  
+})
 
-export default App
+export default connect(
+  mapStateToProps
+)(App)

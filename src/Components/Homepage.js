@@ -4,6 +4,9 @@ import { addTodo } from '../Actions'
 import { NavigationDrawer, Paper, Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
 import '../App.css';
 
+//import Visible from '../Components/Visible'
+import List from '../Components/List'
+
 let AddTodo=({dispatch})=>{
 
     let input;
@@ -63,8 +66,8 @@ return(
               <br /> <br /><br /><br />
               <Button raised onClick={e=>{
               e.preventDefault()
-              dispatch(addTodo("ss"))
-             // window.location="/Enterdetails"
+              dispatch(addTodo("Test"))
+          //    window.location="/Enterdetails"
             }} >Create Measure</Button>
               <br /><br /><br />
             </fieldset>
@@ -72,8 +75,9 @@ return(
           <br /><br />
           <Button raised>Cancel</Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <Button raised>Save</Button>
+  <Button raised >Save</Button>
           <br /><br /><br />
+          < List/>
         </fieldset> 
     </div>
 )

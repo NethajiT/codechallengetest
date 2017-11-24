@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Routing from './Routing'
+//import Routing from './Routing'
 import registerServiceWorker from './registerServiceWorker';
 import WebFontLoader from 'webfontloader';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import { render } from 'react-dom'
-import reducer from './Reducers/'
+import reducer from './store/rootReducer'
 
 const store=createStore(reducer);
 

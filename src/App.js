@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
-import logo from './logo.svg';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 import Homepage from './Components/Homepage';
 import Select from './Components/Selectpage'
-//import Todo from './Components/AddTodo'
 
 const Measure = () => (
   <Router>

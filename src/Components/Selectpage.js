@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import '../Enterdetails.css'
-import { FontIcon } from 'react-md';
-import {renderTodos,renderPageNumbers} from './Pagination';
 import { connect } from 'react-redux'
 
-//import Visible from '../Components/Visible'
-import List from '../Components/List'
 
-class App extends React.Component {
+
+
+const Show = ({id,text }) => (
+ <span>
+     &nbsp;&nbsp;
+    {text}   
+  </span>
+)  
+
+class App extends Component {
     constructor() {
         super();
 
@@ -55,7 +59,7 @@ class App extends React.Component {
         const currentTodos = data.slice(indexOfFirstTodo, indexOfLastTodo);
 
         const renderTodos = currentTodos.map((todo, index) => {
-            console.log(todo)
+            
             return <div id="Content" key={index}><input type="radio" /> &nbsp; &nbsp;
          <b> {todo.Dataset} </b>
                 &nbsp; &nbsp; &nbsp; &nbsp;
@@ -81,12 +85,17 @@ class App extends React.Component {
             </span>
             );
         });
-
+ 
         return (
             <div>
                 <fieldset id="View">
-                     <List/>  ??
-                    <p id="Title">Enter details for</p>
+                      
+                    <p id="Title">Enter details for
+                     <span>
+                          {this.props.todos.map(todo => <Show key={todo.id}  {...todo} /> )}          
+                     </span>
+
+                    </p>
                     <div id="EDcontent">
                         <div className="topnav">
                             <a className="active" href="/Select Dataset">&#10112; &nbsp;Select Dataset</a>
@@ -106,7 +115,11 @@ class App extends React.Component {
                         </fieldset>
                     </div>
                     <button>Cancel</button>
-                   
+
+                 <ul>
+             
+        </ul>
+
                 </fieldset>
 
             </div>
@@ -115,11 +128,13 @@ class App extends React.Component {
     }
 }
 
+
 const mapStateToProps = (state) => ({ 
   todos: state.todos
-  
 })
 
-export default connect(
+const Select = connect(
   mapStateToProps
 )(App)
+
+export default Select

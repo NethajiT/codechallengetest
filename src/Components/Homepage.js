@@ -1,21 +1,33 @@
-import React,{component} from 'react'
+import React,{Component} from 'react'
 import {connect} from 'react-redux'
-import { addTodo } from '../Actions'
-import { NavigationDrawer, Paper, Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
+import { createMeasure } from '../store/NewMeasure/action'
+import {Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
 import '../App.css';
 
 //import Visible from '../Components/Visible'
-import List from '../Components/List'
+//import List from '../Components/List'
 
-let AddTodo=({dispatch})=>{
 
-    let input;
+class AddTodo extends Component{
 
+ constructor() {
+        super();
+
+        this.state = {
+            name: ""       
+        }
+    }
+
+handleChange=(value)=>{
+  this.setState({name:value});
+}
+
+  render(){
     
 return(
     <div>
        <fieldset id="Main">
-          <span id="New">Create New Measure </span>
+          <span id="New">Create New Measure</span>
           <fieldset>
             <div id="Titles"> &#10112; Measure Details</div>
             <fieldset>
@@ -25,7 +37,7 @@ return(
                   lineDirection="center"
                   leftIcon={<FontIcon>local_offer</FontIcon>}
                   placeholder="Enter Measure Name"
-                  onChange={value => this.handleChange('email', value)}
+                  onChange={value => this.handleChange(value)}
                   className="md-cell md-cell--bottom"
                   
                 />
@@ -66,8 +78,9 @@ return(
               <br /> <br /><br /><br />
               <Button raised onClick={e=>{
               e.preventDefault()
-              dispatch(addTodo("Test"))
-          //    window.location="/Enterdetails"
+              this.props.dispatch(createMeasure(this.state.name))
+               this.props.history.push("/Enterdetails")
+             // window.location="/Enterdetails"
             }} >Create Measure</Button>
               <br /><br /><br />
             </fieldset>
@@ -77,12 +90,13 @@ return(
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <Button raised >Save</Button>
           <br /><br /><br />
-          < List/>
+         
         </fieldset> 
     </div>
 )
 }
+}
 
 
-AddTodo = connect()(AddTodo)
-export default AddTodo
+
+export default connect()(AddTodo)

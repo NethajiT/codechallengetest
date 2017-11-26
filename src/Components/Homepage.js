@@ -105,7 +105,8 @@ import '../App.css';
 
 // export default connect()(AddTodo)
 
-const Homepage=({handleChange,onClick})=>{
+const Homepage =({handleChange,submit})=>{
+  
     
 return(
     <div>
@@ -159,7 +160,7 @@ return(
 
               </div>
               <br /> <br /><br /><br />
-              <Button raised onClick={onClick} >Create Measure</Button>
+              <Button raised onClick={submit} >Create Measure</Button>
               <br /><br /><br />
             </fieldset>
           </fieldset>
@@ -168,7 +169,7 @@ return(
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <Button raised >Save</Button>
           <br /><br /><br />
-         
+                  
         </fieldset> 
     </div>
 )

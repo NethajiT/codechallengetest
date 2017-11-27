@@ -1,4 +1,4 @@
-const todos = (state = [], action) => {
+const measures = (state = [], action) => {
   switch (action.type) {
     case 'CREATE_MEASURE':
     console.log(action);
@@ -18,4 +18,4 @@ const todos = (state = [], action) => {
   }
 }
 
-export default todos
+export default measures

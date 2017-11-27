@@ -3,8 +3,8 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
-import Homepage from './container/Homepage';
-import Select from './Components/Selectpage'
+import Homepage from './containers/Homepage';
+import Select from './containers/Selectpage'
 
 const Measure = () => (
   <Router>

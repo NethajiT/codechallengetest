@@ -1,33 +1,17 @@
-import React, { Component } from 'react';
-import { NavigationDrawer, Paper, Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
+import React,{Component} from 'react'
+import {connect} from 'react-redux'
+import { createMeasure } from '../store/NewMeasure/action'
+import {Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
 import '../App.css';
 
 
-class App extends Component {
+const Homepage =({handleChange,submit})=>{
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: ''  
-    };
-  }
-  handleChange(fieldType, value) {
-     
-    this.setState({ email: value });
-   console.log(this.state.email)
-  }
-
-  create=()=> { 
-     alert(this.state.email)
-    window.location = "/Enterdetails";
-  }
-  
-  render() {
-    return (
-
-      <div>
-        <fieldset id="Main">
-          <span id="New">Create New Measure </span>
+    
+return(
+    <div>
+       <fieldset id="Main">
+          <span id="New">Create New Measure</span>
           <fieldset>
             <div id="Titles"> &#10112; Measure Details</div>
             <fieldset>
@@ -37,7 +21,7 @@ class App extends Component {
                   lineDirection="center"
                   leftIcon={<FontIcon>local_offer</FontIcon>}
                   placeholder="Enter Measure Name"
-                  onChange={value => this.handleChange('email', value)}
+                  onChange={value =>handleChange(value)}
                   className="md-cell md-cell--bottom"
                   
                 />
@@ -76,20 +60,22 @@ class App extends Component {
 
               </div>
               <br /> <br /><br /><br />
-              <Button raised onClick={this.create}>Create Measure</Button>
+              <Button raised onClick={submit} >Create Measure</Button>
               <br /><br /><br />
             </fieldset>
           </fieldset>
           <br /><br />
           <Button raised>Cancel</Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <Button raised>Save</Button>
+  <Button raised >Save</Button>
           <br /><br /><br />
-        </fieldset>
-
-      </div>
-    );
-  }
+                  
+        </fieldset> 
+    </div>
+)
 }
 
-export default App;
+
+
+
+export default Homepage

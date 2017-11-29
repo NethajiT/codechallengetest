@@ -17,6 +17,7 @@ import { createMeasure } from '../store/NewMeasure/action'
 
 handleChange=(value)=>{
   this.setState({name:value});
+  console.log("v")
   console.log(value)
 }
 

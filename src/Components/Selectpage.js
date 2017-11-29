@@ -10,7 +10,7 @@ const App = ({ input, rendermeasures, renderPageNumbers }) => {
 
                 <p id="Title">Enter details for
                      <span>
-                        {input}
+                       &nbsp;&nbsp; {input}
                     </span>
 
                 </p>

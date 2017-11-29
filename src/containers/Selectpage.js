@@ -2,101 +2,99 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from "../components/Selectpage"
 
-const Show = ({ id, text }) => (
-    <span>
-        &nbsp;&nbsp;
-    {text}
-    </span>
-)
 
 class App extends Component {
-    constructor() {
-        super();
+	constructor() {
+		super();
 
-        this.state = {
-            data: [
-                {
-                    Dataset: 'Dataset 1',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 2',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 3',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 4',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 5',
-                    Duration: 'Jan 2014'
-                }
-            ],
-            currentPage: 1,
-            measuresPerPage: 2
-        }
-    }
+		this.state =
+			{
+				currentPage: 1,
+				measuresPerPage: 2
+			}
 
-    handleClick = (event) => {
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-    }
-    render() {
-        
-        const { data, currentPage, measuresPerPage } = this.state;
+	}
 
-        const indexOfLastmeasure = currentPage * measuresPerPage;
-        const indexOfFirstmeasure = indexOfLastmeasure - measuresPerPage;
-        const currentmeasures = data.slice(indexOfFirstmeasure, indexOfLastmeasure);
+	handleClick = (event) => {
+		this.setState({
+			currentPage: Number(event.target.id)
+		});
+	}
+	render() {
 
-        const rendermeasures = currentmeasures.map((measure, index) => {
+		const { data, currentPage, measuresPerPage } = this.state;
+		const { measures, dataset } = this.props;
+		const indexOfLastmeasure = currentPage * measuresPerPage;
+		const indexOfFirstmeasure = indexOfLastmeasure - measuresPerPage;
+		const datasets = this.props.measures.datas;
+		
+		const currentmeasures = datasets.slice(indexOfFirstmeasure, indexOfLastmeasure);
+		console.log(currentmeasures)
+		// const currentmeasures = data.slice(indexOfFirstmeasure, indexOfLastmeasure);
+		// console.log(currentmeasures)
 
-            return <div id="Content" key={index}><input type="radio" /> &nbsp; &nbsp;
-         <b> {measure.Dataset} </b>
-                &nbsp; &nbsp; &nbsp; &nbsp;
+		if (currentmeasures && currentmeasures.length > 0) {
+			const rendermeasures = currentmeasures.map((measure, index) => {
+
+				return <div id="Content" key={index}><input type="radio" /> &nbsp; &nbsp;
+         <b> {measure.Datasets} </b>
+					&nbsp; &nbsp; &nbsp; &nbsp;
           Last executed on - &nbsp;
-          <span id="Period"> {measure.Duration} </span>;
+          <span id="Period"> {measure.Durations} </span>;
             </div>;
-        });
 
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(data.length / measuresPerPage); i++) {
-            pageNumbers.push(i);
-        }
+			});
+		
 
-        const renderPageNumbers = pageNumbers.map(number => {
-            return (
+		const pageNumbers = [];
+		for (let i = 1; i <= Math.ceil(datasets.length / measuresPerPage); i++) {
+			pageNumbers.push(i);
+		}
 
-                <span className="Page"
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}
-                >
-                    {number} &nbsp;
+		const renderPageNumbers = pageNumbers.map(number => {
+			return (
+
+
+				<span className="Page"
+					key={number}
+					id={number}
+					onClick={this.handleClick}
+				>
+					{number} &nbsp;
             </span>
-            );
-        });
+			);
+		});
 
-        return (
+		return (
+			<div>
 
-            <Select input={this.props.measures.map(measure => <Show key={measure.id}  {...measure} />)}
-                rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers}
-            />
-        )
-    }
+
+				<Select input={this.props.measures.text}
+					rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers}
+
+				/>
+				
+			
+			</div>
+		)
+
+	}
+	else{
+		return <div>GO to first page</div>
+	}
 }
 
+}
+
+
+
 const mapStateToProps = (state) => ({
-    measures: state.measures
+	measures: state.measures,
+	dataset: state.dataset
 })
 
 const Selects = connect(
-    mapStateToProps
+	mapStateToProps
 )(App)
 
 export default Selects

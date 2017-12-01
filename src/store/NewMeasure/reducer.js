@@ -31,6 +31,53 @@ const measures = (state = initialState, action) => {
                 {
                     Datasets: 'Dataset 5',
                     Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 6',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 7',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 8',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 9',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 10',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 11',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 12',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 13',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 14',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 15',
+                    Durations: 'Jan 2014'
+                },
+                {
+                    Datasets: 'Dataset 16',
+                    Durations: 'Jan 2014'
+                },{
+                    Datasets: 'Dataset 17',
+                    Durations: 'Jan 2014'
                 }
             ]
       });

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../Enterdetails.css'
 import { connect } from 'react-redux'
 
-const App = ({ input, rendermeasures, renderPageNumbers }) => {
+const App = ({ input, rendermeasures, renderPageNumbers,chips }) => {
     return (
         
         <div>
@@ -28,7 +28,14 @@ const App = ({ input, rendermeasures, renderPageNumbers }) => {
                     <fieldset id="Output">
                         <div >
                             {rendermeasures}
-                            {renderPageNumbers}
+                            {/*{renderPageNumbers}*/}
+                            <fieldset>
+                            <div>Selected Datasets<span>
+                            {chips}</span>
+                            </div>
+                            </fieldset>
+                          
+
                         </div>
                     </fieldset>
                 </div>

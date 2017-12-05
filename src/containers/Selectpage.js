@@ -52,13 +52,24 @@ class App extends Component {
 			this.setState({ chipdata: newChipdata })
 		}
 	}
+	
 
-	// chipclick = (value, id) => {
+	chipclick = (value, id) => {
+			console.log(value)
+			 var x = document.getElementsByTagName("input");
+			 var searchText =value;
+			 for (var i = 0; i < x.length; i++)
+				   {  if (x[i].value == searchText)
+						 {  document.getElementsByTagName("input")[i].checked=false 
+						  }
+				   }
+		//console.log("value")
+			var newChipdata = this.state.chipdata
+			var index = newChipdata.indexOf(value)
+			newChipdata.splice(index, 1)
+			this.setState({ chipdata: newChipdata })
 
-	// 	var newChipdata = this.state.chipdata.slice()
-	// 	newChipdata.pop(value)
-	// 	this.setState({ chipdata: newChipdata })
-	// }
+	}
 	render() {
 
 		const { data, currentPage, measuresPerPage } = this.state;
@@ -66,7 +77,6 @@ class App extends Component {
 		const indexOfLastmeasure = currentPage * measuresPerPage;
 		const indexOfFirstmeasure = indexOfLastmeasure - measuresPerPage;
 		const datasets = this.props.measures.datas;
-
 		const currentmeasures = datasets.slice(indexOfFirstmeasure, indexOfLastmeasure);
 		//console.log(currentmeasures)
 		// const currentmeasures = data.slice(indexOfFirstmeasure, indexOfLastmeasure);
@@ -111,7 +121,7 @@ class App extends Component {
 
 			const chips = this.state.chipdata.map((c, i) => {
 				return (
-					<Chip label={c}  value={c} onClick={e => this.chipclick(e.target.value, { i })} />
+					<Chip label={c}  value={c} onClick={e => this.chipclick(c, { i })} />
 				)
 			})
 

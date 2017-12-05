@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import Home from "../components/Homepage"
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import { createMeasure } from '../store/NewMeasure/action'
 
@@ -30,7 +30,7 @@ submit=(e)=>{
     render(){
         return(
             <div>
-            <Home handleChange={value=>this.handleChange(value)} submit={this.submit}/>
+            <Home handleChange={value=>this.handleChange(value)} submit={this.submit}/>            
             </div>       
         )
     }

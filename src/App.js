@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom'
 import Homepage from './containers/Homepage';
 import Select from './containers/Selectpage'
+import Routing from './components/RoutingDemo'
 
 const Measure = () => (
   <Router>
@@ -15,4 +16,11 @@ const Measure = () => (
   </Router>
 )
 
+// class Measure extends React.Component{
+//   render(){
+//     return(
+//       <Routing/>
+//     )
+//   }
+// }
 export default Measure;

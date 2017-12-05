@@ -85,6 +85,9 @@ button{
     left:850px;
 }
 
-#datasetDetails{
-   
+#tabs{
+   color:black;
+   background: gray;
+   height: 30px;
 }
+

@@ -3,6 +3,7 @@ import '../Enterdetails.css'
 import { connect } from 'react-redux'
 import { Paper } from 'react-md'
 import { TabsContainer, Tabs, Tab } from 'react-md';
+import RefineDataset from '../containers/RefineDataset'
 
 const App = ({ input, rendermeasures, renderPageNumbers, chips }) => {
     return (
@@ -37,7 +38,7 @@ const App = ({ input, rendermeasures, renderPageNumbers, chips }) => {
                                     </div>
                                 </Paper>
                             </div></Tab>
-                            <Tab label="Refine Dataset">Pending</Tab>
+                            <Tab label="Refine Dataset"><RefineDataset /></Tab>
                             <Tab label="Add Computation">Pending </Tab>
                             <Tab label="Output Attributes">Pending </Tab>
                             <Tab label="Summary">Pending </Tab>

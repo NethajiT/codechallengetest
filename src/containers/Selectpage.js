@@ -26,48 +26,53 @@ class App extends Component {
 	}
 
 	handleClick = (event) => {
-		document.getElementById("0").checked = false;
+			
 
-		alert("aa")
+		//	alert("aa")
 		this.setState({
 			currentPage: Number(event.target.id)
 		});
+	
+		document.getElementById("6").checked = false;
 	}
 
 	check = (value, id) => {
 		var box = document.getElementById(id);
 		if (ReactDOM.findDOMNode(box).checked) {
-			ReactDOM.findDOMNode(box).classList.remove("unchecked")
-			ReactDOM.findDOMNode(box).classList.add("checked")
+			//	document.getElementById(id).classList.remove("unchecked")
+			//	document.getElementById(id).classList.add("checked")
 			var newChipdata = this.state.chipdata
 			newChipdata.push(value)
 			this.setState({ chipdata: newChipdata })
 		}
 		else {
-			ReactDOM.findDOMNode(box).classList.remove("checked")
-			ReactDOM.findDOMNode(box).classList.add("unchecked")
+			//	ReactDOM.findDOMNode(box).classList.remove("checked")
+			//	ReactDOM.findDOMNode(box).classList.add("unchecked")
 			var newChipdata = this.state.chipdata
 			var index = newChipdata.indexOf(value)
 			newChipdata.splice(index, 1)
 			this.setState({ chipdata: newChipdata })
 		}
 	}
-	
 
-	chipclick = (value, id) => {
-			console.log(value)
-			 var x = document.getElementsByTagName("input");
-			 var searchText =value;
-			 for (var i = 0; i < x.length; i++)
-				   {  if (x[i].value == searchText)
-						 {  document.getElementsByTagName("input")[i].checked=false 
-						  }
-				   }
+
+	chipclick = (value) => {
+		// console.log(value)
+		//  var x = document.getElementsByTagName("input");
+		//  var searchText =value;
+		//  for (var i = 0; i < x.length; i++)
+		// 	   {  if (x[i].value == searchText)
+		// 			 {  document.getElementsByTagName("input")[i].checked=false 
+		// 			  }
+		// 	   }
 		//console.log("value")
-			var newChipdata = this.state.chipdata
-			var index = newChipdata.indexOf(value)
-			newChipdata.splice(index, 1)
-			this.setState({ chipdata: newChipdata })
+		var newChipdata = this.state.chipdata
+		console.log(value.substr(8))
+		var id = value.substr(8);
+		document.getElementById(id).checked = false
+		var index = newChipdata.indexOf(value)
+		newChipdata.splice(index, 1)
+		this.setState({ chipdata: newChipdata })
 
 	}
 	render() {
@@ -84,12 +89,12 @@ class App extends Component {
 
 		if (currentmeasures && currentmeasures.length > 0) {
 			const rendermeasures = currentmeasures.map((measure, index) => {
-
+				//id={index} for TableColumn
 				return (
 					<DataTable plain>
 						<TableBody>
 							<TableRow key={index} >
-								<TableColumn ><input type='checkbox' value={measure.Datasets} id={index}
+								<TableColumn ><input type='checkbox' value={measure.Datasets} id={measure.Datasets.substr(8)}
 									onClick={e => this.check(e.target.value, e.target.id)} className="unchecked" />
 									<b >{measure.Datasets}</b></TableColumn>
 								<TableColumn >	Last executed on -<span id="Period">{measure.Durations}</span></TableColumn>
@@ -121,7 +126,7 @@ class App extends Component {
 
 			const chips = this.state.chipdata.map((c, i) => {
 				return (
-					<Chip label={c}  value={c} onClick={e => this.chipclick(c, { i })} />
+					<Chip label={c} value={c} onClick={e => this.chipclick(c, c.substr(8))} />
 				)
 			})
 

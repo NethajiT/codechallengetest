@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import Select from "../components/Selectpage"
 import {
 	DataTable,
-	TableHeader,
 	TableBody,
 	TableRow,
 	TableColumn,
-	TableFooter,
 	Chip
 } from 'react-md';
-import { Dataset } from '../utils/Dataset';
+//import { Dataset } from '../utils/Dataset';
+import { createChip,removeChip } from '../store/Chipdata/action'
+import { dropdownValues } from '../store/Dropdown/action'
 class App extends Component {
 	constructor() {
 		super();
@@ -20,43 +20,37 @@ class App extends Component {
 			{
 				currentPage: 1,
 				measuresPerPage: 5,
-				chipdata: []
+				chipdata: [],			
 			}
-
 	}
 
 	handleClick = (event) => {
-			
-
-		//	alert("aa")
 		this.setState({
 			currentPage: Number(event.target.id)
 		});
-	
-		document.getElementById("6").checked = false;
+        
 	}
+    
 
 	check = (value, id) => {
-		var box = document.getElementById(id);
-		if (ReactDOM.findDOMNode(box).checked) {
-			//	document.getElementById(id).classList.remove("unchecked")
-			//	document.getElementById(id).classList.add("checked")
+		if (document.getElementById(id).checked) {
+			this.props.dispatch(createChip(value));
 			var newChipdata = this.state.chipdata
 			newChipdata.push(value)
 			this.setState({ chipdata: newChipdata })
 		}
 		else {
-			//	ReactDOM.findDOMNode(box).classList.remove("checked")
-			//	ReactDOM.findDOMNode(box).classList.add("unchecked")
-			var newChipdata = this.state.chipdata
+			 newChipdata = this.state.chipdata
 			var index = newChipdata.indexOf(value)
 			newChipdata.splice(index, 1)
 			this.setState({ chipdata: newChipdata })
+			this.props.dispatch(removeChip(value));
 		}
 	}
 
 
 	chipclick = (value) => {
+		 this.props.dispatch(removeChip(value));
 		// console.log(value)
 		//  var x = document.getElementsByTagName("input");
 		//  var searchText =value;
@@ -66,32 +60,41 @@ class App extends Component {
 		// 			  }
 		// 	   }
 		//console.log("value")
+
 		var newChipdata = this.state.chipdata
-		console.log(value.substr(8))
 		var id = value.substr(8);
 		document.getElementById(id).checked = false
 		var index = newChipdata.indexOf(value)
 		newChipdata.splice(index, 1)
 		this.setState({ chipdata: newChipdata })
+       
+	}
 
+	selectvalue=()=>{
+		 var indexValue = document.getElementById("Dropdown").selectedIndex;
+         var dropdownValue = document.getElementById("Dropdown").options[indexValue].value;
+		 this.props.dispatch(dropdownValues(dropdownValue))
+		
+	}
+
+	refine=()=>{
+		 this.props.history.push("/Refinedataset")
 	}
 	render() {
 
-		const { data, currentPage, measuresPerPage } = this.state;
-		const { measures, dataset } = this.props;
+		const {  currentPage, measuresPerPage } = this.state;
+		//const {  dataset } = this.props;
 		const indexOfLastmeasure = currentPage * measuresPerPage;
 		const indexOfFirstmeasure = indexOfLastmeasure - measuresPerPage;
 		const datasets = this.props.measures.datas;
 		const currentmeasures = datasets.slice(indexOfFirstmeasure, indexOfLastmeasure);
-		//console.log(currentmeasures)
-		// const currentmeasures = data.slice(indexOfFirstmeasure, indexOfLastmeasure);
-		// console.log(currentmeasures)
 
 		if (currentmeasures && currentmeasures.length > 0) {
+			
 			const rendermeasures = currentmeasures.map((measure, index) => {
 				//id={index} for TableColumn
 				return (
-					<DataTable plain>
+					<DataTable plain key={index}>
 						<TableBody>
 							<TableRow key={index} >
 								<TableColumn ><input type='checkbox' value={measure.Datasets} id={measure.Datasets.substr(8)}
@@ -112,45 +115,55 @@ class App extends Component {
 
 			const renderPageNumbers = pageNumbers.map(number => {
 				return (
-
-
 					<span className="Page"
 						key={number}
 						id={number}
 						onClick={this.handleClick}
 					>
 						{number} &nbsp;
-            </span>
+                   </span>
 				);
-			});
-
-			const chips = this.state.chipdata.map((c, i) => {
-				return (
-					<Chip label={c} value={c} onClick={e => this.chipclick(c, c.substr(8))} />
+			});	
+			
+			const chips = this.props.chipdatas.map((c, i) => {			
+				return (	
+					<div  key={i}>			
+					<Chip label={c} value={c} onClick={e => this.chipclick(c, c.substr(8))} /></div>
 				)
 			})
 
+           const dropdowns = () => {
+            return (
 
+                    <div>
+                    <select id="Dropdown" onChange={this.selectvalue}>
+                        {this.props.chipdatas.map((Data, i) => (
+                            <option value={Data} key={i}>{Data}</option>))}
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+            )
+        }
+
+		const Field=()=>{
+			this.props.chipdatas.map((c,i)=>{
+				return(<div>{c}</div>)
+			})
+			
+		}
+
+		const {  dropdownval, dropdownfields } = this.props;
 			return (
 				<div>
-
-
+					
 					<Select input={this.props.measures.text}
-						rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers} chips={chips}
+						rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers} chips={chips} refine={this.refine}
+						dropdowns={dropdowns} dropdownval={dropdownfields.map((c,i)=>{return(<div>{c}</div>)})}
 					/>
-					{/*				
-		     <DataTable baseId="simple-selectable-table" indeterminate>
-    <TableBody>
-      {Dataset.map((Data,i) => (
-        <TableRow key={i}>
-          <TableColumn>{Data.Datasets}</TableColumn>
-          <TableColumn>{Data.Durations}</TableColumn>
-        </TableRow>
-      ))}
-    </TableBody>
-  </DataTable>*/}
-
+					<div>{dropdownval}</div>
+					<div>{dropdownfields.map((c,i)=>{return(<div>{c}</div>)})}</div>
 				</div>
+		
 			)
 		}
 
@@ -161,13 +174,23 @@ class App extends Component {
 
 }
 
-
-
 const mapStateToProps = (state) => {
-	return {
-		measures: state.measures
+	console.log(state.dropdown.fields)
+	 if(state.chips.chipdata.length>0){
+        return {			
+		measures: state.measures,
+		chipdatas:state.chips.chipdata,
+		dropdownval:state.dropdown.dropdownValue,
+		dropdownfields:state.dropdown.fields
 	}
-
+}
+else{
+ 	return {			
+		 measures: state.measures,
+		chipdatas:[],
+		dropdownfields:[]
+	}  
+}
 }
 
 const Selects = connect(

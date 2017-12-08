@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Paper, Grid, Cell } from 'react-md';
 import RefineDataset from "../components/RefineDataset"
+import { connect } from 'react-redux'
+import Select from "../containers/Selectpage"
 
 class Refine extends Component {
     constructor() {
@@ -9,22 +11,22 @@ class Refine extends Component {
         this.state =
             {
 
-                dataset: ["aaaaaaaaaa", "s", "sd"]
+                dataset: []
             }
 
     }
+
+    componentWillMount() {
+        this.setState({ dataset: this.props.chipdatas })
+    }
     render() {
-        // const chips = this.state.chipdata.map((c, i) => {
-        // 				return (
-        // 					<Chip label={c}  value={c} onClick={e => this.chipclick(c, { i })} />
-        // 				)
-        // 			})
+
         const dropdowns = () => {
             return (
 
                 <Paper>
                     <select>
-                        {this.state.dataset.map((Data, i) => (
+                        {this.props.chipdatas.map((Data, i) => (
                             <option value={Data}>{Data}</option>))}
                     </select>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -32,14 +34,28 @@ class Refine extends Component {
                         {this.state.dataset.map((Data, i) => (
                             <option value={Data}>{Data}</option>))}
                     </select>
-
+                    
                 </Paper>
             )
         }
         return (
-            <RefineDataset dropdowns={dropdowns} />
+            <div>
+                <Select dropdowns={dropdowns} />
+            </div>
         )
     }
 }
 
-export default Refine
+const mapStateToProps = (state) => {
+    return {
+        measures: state.measures,
+        chipdatas: state.chips.chipdata
+    }
+
+}
+
+const Refinedataset = connect(
+    mapStateToProps
+)(Refine)
+
+export default Refinedataset

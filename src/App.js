@@ -5,22 +5,16 @@ import {
 } from 'react-router-dom'
 import Homepage from './containers/Homepage';
 import Select from './containers/Selectpage'
-import Routing from './components/RoutingDemo'
+//import Refine from './containers/RefineDataset'
 
 const Measure = () => (
   <Router>
     <div>
       <Route exact path="/" component={Homepage}/>
       <Route path="/Enterdetails" component={Select}/>
+      <Route path="/Refinedataset" component={Select}/>
     </div>
   </Router>
 )
 
-// class Measure extends React.Component{
-//   render(){
-//     return(
-//       <Routing/>
-//     )
-//   }
-// }
 export default Measure;

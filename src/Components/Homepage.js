@@ -1,6 +1,6 @@
-import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import { createMeasure } from '../store/NewMeasure/action'
+import React from 'react'
+//import {connect} from 'react-redux'
+//import { createMeasure } from '../store/NewMeasure/action'
 import {Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
 import '../App.css';
 

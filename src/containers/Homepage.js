@@ -17,8 +17,6 @@ class Homepages extends Component {
 
     handleChange = (value) => {
         this.setState({ name: value });
-        console.log("v")
-        console.log(value)
     }
 
     submit = (e) => {
@@ -31,6 +29,7 @@ class Homepages extends Component {
         return (
             <div>
                 <Home handleChange={value => this.handleChange(value)} submit={this.submit} />
+                
             </div>
         )
     }

@@ -4,7 +4,7 @@ import '../Enterdetails.css'
 import { Paper } from 'react-md'
 import { TabsContainer, Tabs, Tab,Grid,Cell } from 'react-md';
 
-const App = ({ input, rendermeasures, renderPageNumbers, chips, refine,dropdowns,field,dropdownval }) => {
+const App = ({ input, rendermeasures, renderPageNumbers, chips,dropdownfields,dropdowns,field,dropdownval }) => {
     return (
 
         <div>
@@ -37,19 +37,24 @@ const App = ({ input, rendermeasures, renderPageNumbers, chips, refine,dropdowns
                             </div></Tab>
                             <Tab label="Refine Dataset" >
                                 <div>
-                                    <Paper>
+                                   
                                         Merge
                                         <Grid className="grid-example">
-                                            <Cell size={8} tabletSize={8} >
-                                                
-                                                {dropdowns}  
-                                               
-                                               
-                                                                                       
+                                            <Cell size={2} > 
+                                                {dropdowns}              
+                                                {/* {dropdownval}
+                                                 {dropdownfields}            */}                                               
                                             </Cell>
-                                            <Cell size={4} tabletSize={6}>{dropdownval}</Cell>
+                                            <Paper><Cell  size={6}><div>{dropdownval}
+                                                {dropdownfields}
+                                                </div></Cell></Paper>
+                                                <Cell  size={4}>
+                                                <div>
+                                                    Merged Dataset
+                                                </div></Cell>
+                                            
                                         </Grid>
-                                    </Paper>
+                                    
                                 </div>
                             </Tab>
                             <Tab label="Add Computation">Pending </Tab>

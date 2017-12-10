@@ -7,7 +7,7 @@ import {
 	TableBody,
 	TableRow,
 	TableColumn,
-	Chip
+	Chip,Paper
 } from 'react-md';
 //import { Dataset } from '../utils/Dataset';
 import { createChip,removeChip } from '../store/Chipdata/action'
@@ -76,10 +76,14 @@ class App extends Component {
 		 this.props.dispatch(dropdownValues(dropdownValue))
 		
 	}
-
+       
 	refine=()=>{
 		 this.props.history.push("/Refinedataset")
 	}
+
+	click=()=>{
+		   alert('c')
+	   }
 	render() {
 
 		const {  currentPage, measuresPerPage } = this.state;
@@ -128,29 +132,29 @@ class App extends Component {
 			const chips = this.props.chipdatas.map((c, i) => {			
 				return (	
 					<div  key={i}>			
-					<Chip label={c} value={c} onClick={e => this.chipclick(c, c.substr(8))} /></div>
+					<Chip id="chip" label={c} value={c} onClick={e => this.chipclick(c, c.substr(8))} /></div>
 				)
 			})
 
            const dropdowns = () => {
             return (
 
-                    <div>
+                    
                     <select id="Dropdown" onChange={this.selectvalue}>
                         {this.props.chipdatas.map((Data, i) => (
                             <option value={Data} key={i}>{Data}</option>))}
                     </select>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </div>
+                    //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
             )
-        }
-
-		const Field=()=>{
-			this.props.chipdatas.map((c,i)=>{
-				return(<div>{c}</div>)
-			})
-			
 		}
+		
+		const dropdownfield=this.props.dropdownfields.map((c,i)=>{
+			return(
+			<fieldset onClick={this.click} >{c}</fieldset>)
+		})
+
+		
 
 		const {  dropdownval, dropdownfields } = this.props;
 			return (
@@ -158,10 +162,11 @@ class App extends Component {
 					
 					<Select input={this.props.measures.text}
 						rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers} chips={chips} refine={this.refine}
-						dropdowns={dropdowns} dropdownval={dropdownfields.map((c,i)=>{return(<div>{c}</div>)})}
+						dropdowns={dropdowns} dropdownfields={dropdownfield}
+						dropdownval={dropdownval}
 					/>
-					<div>{dropdownval}</div>
-					<div>{dropdownfields.map((c,i)=>{return(<div>{c}</div>)})}</div>
+					{/* <div>{dropdownval}</div>
+					<div>{dropdownfields.map((c,i)=>{return(<div>{c}</div>)})}</div> */}
 				</div>
 		
 			)

@@ -84,3 +84,13 @@ button{
     position:relative;
     left:850px;
 }
+
+#tabs{
+   color:black;
+   background: gray;
+   height: 30px;
+}
+
+#chip{
+    float:left
+}

@@ -1,6 +1,6 @@
-import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import { createMeasure } from '../store/NewMeasure/action'
+import React from 'react'
+//import {connect} from 'react-redux'
+//import { createMeasure } from '../store/NewMeasure/action'
 import {Button, FontIcon, IconSeparator, TextField, SelectionControlGroup } from 'react-md';
 import '../App.css';
 
@@ -15,7 +15,7 @@ return(
           <fieldset>
             <div id="Titles"> &#10112; Measure Details</div>
             <fieldset>
-              <IconSeparator iconBefore>
+              <IconSeparator iconBefore label="">
                 <TextField
                   id="floating-center-title"
                   lineDirection="center"
@@ -24,7 +24,9 @@ return(
                   onChange={value =>handleChange(value)}
                   className="md-cell md-cell--bottom"
                   
+                  
                 />
+               
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -41,7 +43,7 @@ return(
               </IconSeparator>
               <br /><br /><br />
               <div id="Key">
-                <i class="material-icons" id="Key">lock_open</i>
+                <i className="material-icons" id="Key">lock_open</i>
                 <SelectionControlGroup
                   id="selection-control-group-radios"
                   type="radio"
@@ -56,6 +58,8 @@ return(
                     label: 'Readonly',
                     value: 'C',
                   }]}
+
+                  name=""
                 />
 
               </div>

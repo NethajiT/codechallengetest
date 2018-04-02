@@ -1,102 +1,205 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+//import ReactDOM from 'react-dom';
 import Select from "../components/Selectpage"
-
-const Show = ({ id, text }) => (
-    <span>
-        &nbsp;&nbsp;
-    {text}
-    </span>
-)
-
+import {
+	DataTable,
+	TableBody,
+	TableRow,
+	TableColumn,
+	Chip,Paper
+} from 'react-md';
+//import { Dataset } from '../utils/Dataset';
+import { createChip,removeChip } from '../store/Chipdata/action'
+import { dropdownValues } from '../store/Dropdown/action'
 class App extends Component {
-    constructor() {
-        super();
+	constructor() {
+		super();
 
-        this.state = {
-            data: [
-                {
-                    Dataset: 'Dataset 1',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 2',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 3',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 4',
-                    Duration: 'Jan 2014'
-                },
-                {
-                    Dataset: 'Dataset 5',
-                    Duration: 'Jan 2014'
-                }
-            ],
-            currentPage: 1,
-            measuresPerPage: 2
-        }
-    }
+		this.state =
+			{
+				currentPage: 1,
+				measuresPerPage: 5,
+				chipdata: [],			
+			}
+	}
 
-    handleClick = (event) => {
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-    }
-    render() {
+	handleClick = (event) => {
+		this.setState({
+			currentPage: Number(event.target.id)
+		});
         
-        const { data, currentPage, measuresPerPage } = this.state;
+	}
+    
 
-        const indexOfLastmeasure = currentPage * measuresPerPage;
-        const indexOfFirstmeasure = indexOfLastmeasure - measuresPerPage;
-        const currentmeasures = data.slice(indexOfFirstmeasure, indexOfLastmeasure);
+	check = (value, id) => {
+		if (document.getElementById(id).checked) {
+			this.props.dispatch(createChip(value));
+			var newChipdata = this.state.chipdata
+			newChipdata.push(value)
+			this.setState({ chipdata: newChipdata })
+		}
+		else {
+			 newChipdata = this.state.chipdata
+			var index = newChipdata.indexOf(value)
+			newChipdata.splice(index, 1)
+			this.setState({ chipdata: newChipdata })
+			this.props.dispatch(removeChip(value));
+		}
+	}
 
-        const rendermeasures = currentmeasures.map((measure, index) => {
 
-            return <div id="Content" key={index}><input type="radio" /> &nbsp; &nbsp;
-         <b> {measure.Dataset} </b>
-                &nbsp; &nbsp; &nbsp; &nbsp;
-          Last executed on - &nbsp;
-          <span id="Period"> {measure.Duration} </span>;
-            </div>;
-        });
+	chipclick = (value) => {
+		 this.props.dispatch(removeChip(value));
+		// console.log(value)
+		//  var x = document.getElementsByTagName("input");
+		//  var searchText =value;
+		//  for (var i = 0; i < x.length; i++)
+		// 	   {  if (x[i].value == searchText)
+		// 			 {  document.getElementsByTagName("input")[i].checked=false 
+		// 			  }
+		// 	   }
+		//console.log("value")
 
-        const pageNumbers = [];
-        for (let i = 1; i <= Math.ceil(data.length / measuresPerPage); i++) {
-            pageNumbers.push(i);
-        }
+		var newChipdata = this.state.chipdata
+		var id = value.substr(8);
+		document.getElementById(id).checked = false
+		var index = newChipdata.indexOf(value)
+		newChipdata.splice(index, 1)
+		this.setState({ chipdata: newChipdata })
+       
+	}
 
-        const renderPageNumbers = pageNumbers.map(number => {
+	selectvalue=()=>{
+		 var indexValue = document.getElementById("Dropdown").selectedIndex;
+         var dropdownValue = document.getElementById("Dropdown").options[indexValue].value;
+		 this.props.dispatch(dropdownValues(dropdownValue))
+		
+	}
+       
+	refine=()=>{
+		 this.props.history.push("/Refinedataset")
+	}
+
+	click=()=>{
+		   alert('c')
+	   }
+	render() {
+
+		const {  currentPage, measuresPerPage } = this.state;
+		//const {  dataset } = this.props;
+		const indexOfLastmeasure = currentPage * measuresPerPage;
+		const indexOfFirstmeasure = indexOfLastmeasure - measuresPerPage;
+		const datasets = this.props.measures.datas;
+		const currentmeasures = datasets.slice(indexOfFirstmeasure, indexOfLastmeasure);
+
+		if (currentmeasures && currentmeasures.length > 0) {
+			
+			const rendermeasures = currentmeasures.map((measure, index) => {
+				//id={index} for TableColumn
+				return (
+					<DataTable plain key={index}>
+						<TableBody>
+							<TableRow key={index} >
+								<TableColumn ><input type='checkbox' value={measure.Datasets} id={measure.Datasets.substr(8)}
+									onClick={e => this.check(e.target.value, e.target.id)} className="unchecked" />
+									<b >{measure.Datasets}</b></TableColumn>
+								<TableColumn >	Last executed on -<span id="Period">{measure.Durations}</span></TableColumn>
+							</TableRow>
+						</TableBody>
+					</DataTable>
+				)
+			});
+
+
+			const pageNumbers = [];
+			for (let i = 1; i <= Math.ceil(datasets.length / measuresPerPage); i++) {
+				pageNumbers.push(i);
+			}
+
+			const renderPageNumbers = pageNumbers.map(number => {
+				return (
+					<span className="Page"
+						key={number}
+						id={number}
+						onClick={this.handleClick}
+					>
+						{number} &nbsp;
+                   </span>
+				);
+			});	
+			
+			const chips = this.props.chipdatas.map((c, i) => {			
+				return (	
+					<div  key={i}>			
+					<Chip id="chip" label={c} value={c} onClick={e => this.chipclick(c, c.substr(8))} /></div>
+				)
+			})
+
+           const dropdowns = () => {
             return (
 
-                <span className="Page"
-                    key={number}
-                    id={number}
-                    onClick={this.handleClick}
-                >
-                    {number} &nbsp;
-            </span>
-            );
-        });
+                    
+                    <select id="Dropdown" onChange={this.selectvalue}>
+                        {this.props.chipdatas.map((Data, i) => (
+                            <option value={Data} key={i}>{Data}</option>))}
+                    </select>
+                    //&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+            )
+		}
+		
+		const dropdownfield=this.props.dropdownfields.map((c,i)=>{
+			return(
+			<fieldset onClick={this.click} >{c}</fieldset>)
+		})
 
-        return (
+		
 
-            <Select input={this.props.measures.map(measure => <Show key={measure.id}  {...measure} />)}
-                rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers}
-            />
-        )
-    }
+		const {  dropdownval, dropdownfields } = this.props;
+			return (
+				<div>
+					
+					<Select input={this.props.measures.text}
+						rendermeasures={rendermeasures} renderPageNumbers={renderPageNumbers} chips={chips} refine={this.refine}
+						dropdowns={dropdowns} dropdownfields={dropdownfield}
+						dropdownval={dropdownval}
+					/>
+					{/* <div>{dropdownval}</div>
+					<div>{dropdownfields.map((c,i)=>{return(<div>{c}</div>)})}</div> */}
+				</div>
+		
+			)
+		}
+
+		else {
+			return <div>GO to first page</div>
+		}
+	}
+
 }
 
-const mapStateToProps = (state) => ({
-    measures: state.measures
-})
+const mapStateToProps = (state) => {
+	console.log(state.dropdown.fields)
+	 if(state.chips.chipdata.length>0){
+        return {			
+		measures: state.measures,
+		chipdatas:state.chips.chipdata,
+		dropdownval:state.dropdown.dropdownValue,
+		dropdownfields:state.dropdown.fields
+	}
+}
+else{
+ 	return {			
+		 measures: state.measures,
+		chipdatas:[],
+		dropdownfields:[]
+	}  
+}
+}
 
 const Selects = connect(
-    mapStateToProps
+	mapStateToProps
 )(App)
 
 export default Selects

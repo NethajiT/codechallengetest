@@ -1,17 +1,4 @@
-const initialState = {
-  id:'',
-  text:'',
-  datas:''
-};
-
-const measures = (state = initialState, action) => {
-  switch (action.type) {
-    case 'CREATE_MEASURE':
-    //console.log(action);
-   return Object.assign({}, state, {
-        id: action.id,
-          text: action.text,
-           datas: [
+export const Dataset=[
                 {
                     Datasets: 'Dataset 1',
                     Durations: 'Jan 2014'
@@ -80,42 +67,17 @@ const measures = (state = initialState, action) => {
                     Durations: 'Jan 2014'
                 }
             ]
-      });
-      // return [
-      //   ...state,
-      //   {
-      //     id: action.id,
-      //     text: action.text,
-      //      datas: [
-      //           {
-      //               Datasets: 'Dataset 1 Vishal',
-      //               Durations: 'Jan 2014'
-      //           },
-      //           {
-      //               Datasets: 'Dataset 2',
-      //               Durations: 'Jan 2014'
-      //           },
-      //           {
-      //               Datasets: 'Dataset 3',
-      //               Durations: 'Jan 2014'
-      //           },
-      //           {
-      //               Datasets: 'Dataset 4',
-      //               Durations: 'Jan 2014'
-      //           },
-      //           {
-      //               Datasets: 'Dataset 5',
-      //               Durations: 'Jan 2014'
-      //           }
-      //       ]
-      //   }
-      // ]
-    
-    default:
-      return state
-      
 
-  }
-}
 
-export default measures
+
+/*
+		     <DataTable baseId="simple-selectable-table" indeterminate>
+    <TableBody>
+      {Dataset.map((Data,i) => (
+        <TableRow key={i}>
+          <TableColumn>{Data.Datasets}</TableColumn>
+          <TableColumn>{Data.Durations}</TableColumn>
+        </TableRow>
+      ))}
+    </TableBody>
+  </DataTable>*/
